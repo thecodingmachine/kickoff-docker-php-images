@@ -28,9 +28,9 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 {{ end }}
 ## PHP-FPM
 {{ range $version := .Values.Images.phpfpm.php_versions }}
-| Name                       | Version                                              |
-|----------------------------|------------------------------------------------------|
-| Base image                 | `php:{{ $version }}-fpm-alpine`                          |
-| APCu                       | `{{ $.Values.Images.phpfpm.apcu_version }}`         |
-| PHP extension for Redis    | `{{ $.Values.Images.phpfpm.phpredis_version }}`     |
+| Name                    | Version                                         |
+|-------------------------|-------------------------------------------------|
+| Base image              | `php:{{ $version }}-fpm-alpine`                 |
+| APCu                    | `{{ $.Values.Images.phpfpm.apcu_version }}`     |
+| PHP extension for Redis | `{{ $.Values.Images.phpfpm.phpredis_version }}` |
 {{ end }}
