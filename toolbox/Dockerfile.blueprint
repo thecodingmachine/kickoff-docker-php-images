@@ -162,7 +162,7 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 
 ENV YARN_VERSION {{ .Values.Images.toolbox.yarn_version }}
 
-RUN apk --no-cache add yarn=$YARN_VERSION
+RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround
