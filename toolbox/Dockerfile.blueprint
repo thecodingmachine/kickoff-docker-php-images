@@ -150,7 +150,7 @@ RUN curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v$PHP_CS_FIXER_VERSIO
 # | NodeJS
 # |--------------------------------------------------------------------------
 # |
-# | Installs NodeJS, npm and yarn. The later will allow you to easily manage
+# | Installs NodeJS and npm. The later will allow you to easily manage
 # | your frontend dependencies.
 # |
 
@@ -158,6 +158,17 @@ ENV NODE_VERSION {{ .Values.Images.toolbox.node_version }}
 
 RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION &&\
     npm install -g yarn
+
+# |--------------------------------------------------------------------------
+# | yarn
+# |--------------------------------------------------------------------------
+# |
+# | Installs yarn. It provides some nice improvements over npm.
+# |
+
+ENV YARN_VERSION {{ .Values.Images.toolbox.yarn_version }}
+
+RUN npm install -g yarn@$YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround

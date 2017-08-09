@@ -3,10 +3,6 @@
 </p>
 <h3 align="center">kickoff-docker-php-images</h3>
 <p align="center">Base images of the [kickoff-docker-php](https://github.com/thecodingmachine/kickoff-docker-php/) project</p>
-<p align="center">
-    <a href="https://github.com/thecodingmachine/kickoff-docker-php/tree/master"><img src="https://img.shields.io/badge/beta-2.0-yellow.svg" alt="Beta release: 2.0"></a>
-    <a href="https://github.com/thecodingmachine/kickoff-docker-php/tree/v1.0.3"><img src="https://img.shields.io/badge/stable-1.0.3-green.svg" alt="Stable release: 1.0.3"></a>
-</p>
 
 ---
 
@@ -29,6 +25,7 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 | prestissimo                | `0.3.7`  |
 | PHP Coding Standards Fixer | `2.4.0` |
 | NodeJS                     | `6.10.3-r1`         |
+| yarn                       | `0.27.5`         |
 
 ## PHP-FPM
 
