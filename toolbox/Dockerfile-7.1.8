@@ -151,8 +151,7 @@ RUN curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v$PHP_CS_FIXER_VERSIO
 
 ENV NODE_VERSION 6.10.3-r1
 
-RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION &&\
-    npm install -g yarn
+RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 
 # |--------------------------------------------------------------------------
 # | yarn
@@ -161,9 +160,9 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION &&\
 # | Installs yarn. It provides some nice improvements over npm.
 # |
 
-ENV YARN_VERSION 0.27.5
+ENV YARN_VERSION 0.23.3-r0
 
-RUN npm install -g yarn@$YARN_VERSION
+RUN apk --no-cache add yarn=$YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround
