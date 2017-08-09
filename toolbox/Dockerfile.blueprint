@@ -62,8 +62,7 @@ RUN mkdir -p /usr/src/php/ext/apcu &&\
 # | PHP extension for Redis
 # |--------------------------------------------------------------------------
 # |
-# | Installs the Redis extension for PHP. Also tells PHP to use it as the
-# | session handler.
+# | Installs the Redis extension for PHP.
 # |
 
 ENV PHPREDIS_VERSION {{ .Values.Images.toolbox.phpredis_version }}
@@ -71,11 +70,7 @@ ENV PHPREDIS_VERSION {{ .Values.Images.toolbox.phpredis_version }}
 RUN mkdir -p /usr/src/php/ext/redis &&\
     curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 &&\
     echo 'redis' >> /usr/src/php-available-exts &&\
-    docker-php-ext-install redis &&\
-    { \
-        echo 'session.save_handler=redis'; \
-        echo 'session.save_path="tcp://redis:6379?auth={{ .EnvFiles.Kickoff.REDIS_PASSWORD }}"'; \
-    } >> /usr/local/etc/php/conf.d/docker-php-ext-redis.ini
+    docker-php-ext-install redis
 
 # |--------------------------------------------------------------------------
 # | 3.6 repositories

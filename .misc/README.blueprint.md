@@ -12,7 +12,6 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 
 * [Toolbox](#toolbox)
 * [PHP-FPM](#php-fpm)
-* [NGINX](#nginx)
 
 ## Toolbox
 {{ range $version := .Values.Images.toolbox.php_versions }}
@@ -28,9 +27,10 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 | yarn                       | `{{ $.Values.Images.toolbox.yarn_version }}`         |
 {{ end }}
 ## PHP-FPM
-
-TODO
-
-## NGINX
-
-TODO
+{{ range $version := .Values.Images.phpfpm.php_versions }}
+| Name                       | Version                                              |
+|----------------------------|------------------------------------------------------|
+| Base image                 | `php:{{ $version }}-fpm-alpine`                          |
+| APCu                       | `{{ $.Values.Images.phpfpm.apcu_version }}`         |
+| PHP extension for Redis    | `{{ $.Values.Images.phpfpm.phpredis_version }}`     |
+{{ end }}

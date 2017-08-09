@@ -1,4 +1,4 @@
-FROM php:7.1.8-alpine
+FROM php:{{ .RawData.PHP_VERSION }}-fpm-alpine
 
 MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 
@@ -51,7 +51,7 @@ RUN set -xe &&\
 # | Installs the APCu extension for PHP.
 # |
 
-ENV APCU_VERSION 5.1.8
+ENV APCU_VERSION {{ .Values.Images.phpfpm.apcu_version }}
 
 RUN mkdir -p /usr/src/php/ext/apcu &&\
     curl -L https://github.com/krakjoe/apcu/archive/v$APCU_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/apcu --strip 1 &&\
@@ -65,7 +65,7 @@ RUN mkdir -p /usr/src/php/ext/apcu &&\
 # | Installs the Redis extension for PHP.
 # |
 
-ENV PHPREDIS_VERSION 3.1.3
+ENV PHPREDIS_VERSION {{ .Values.Images.phpfpm.phpredis_version }}
 
 RUN mkdir -p /usr/src/php/ext/redis &&\
     curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 &&\
@@ -82,88 +82,6 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
 
 RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
-
-# |--------------------------------------------------------------------------
-# | OpenSSL
-# |--------------------------------------------------------------------------
-# |
-# | Installs openssl command, which is required for generating the self-signed
-# | certificate and the .htdigest file.
-# |
-
-RUN apk --no-cache add openssl
-
-# |--------------------------------------------------------------------------
-# | Git
-# |--------------------------------------------------------------------------
-# |
-# | Installs Git command.
-# |
-
-RUN apk --no-cache add git
-
-# |--------------------------------------------------------------------------
-# | Composer
-# |--------------------------------------------------------------------------
-# |
-# | Installs Composer to easily manage your PHP dependencies.
-# |
-
-ENV COMPOSER_VERSION 1.5.0
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
-    chmod +x /usr/local/bin/composer
-
-# |--------------------------------------------------------------------------
-# | prestissimo
-# |--------------------------------------------------------------------------
-# |
-# | Installs prestissimo to fix Composer performance issues.
-# |
-
-ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV PRESTISSIMO_VERSION 0.3.7
-
-RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
-
-# |--------------------------------------------------------------------------
-# | PHP Coding Standards Fixer
-# |--------------------------------------------------------------------------
-# |
-# | The PHP Coding Standards Fixer tool fixes most issues in your code when
-# | you want to follow the PHP coding standards as defined in the PSR-1 and
-# | PSR-2 documents and many more.
-# |
-
-ENV PHP_CS_FIXER_VERSION 2.4.0
-
-RUN curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v$PHP_CS_FIXER_VERSION.phar -o php-cs-fixer &&\
-    chmod a+x php-cs-fixer &&\
-    mv php-cs-fixer /usr/local/bin/php-cs-fixer
-
-# |--------------------------------------------------------------------------
-# | NodeJS
-# |--------------------------------------------------------------------------
-# |
-# | Installs NodeJS and npm. The later will allow you to easily manage
-# | your frontend dependencies.
-# |
-
-ENV NODE_VERSION 6.10.3-r1
-
-RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION &&\
-    npm install -g yarn
-
-# |--------------------------------------------------------------------------
-# | yarn
-# |--------------------------------------------------------------------------
-# |
-# | Installs yarn. It provides some nice improvements over npm.
-# |
-
-ENV YARN_VERSION 0.27.5
-
-RUN npm install -g yarn@$YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround

@@ -12,7 +12,6 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 
 * [Toolbox](#toolbox)
 * [PHP-FPM](#php-fpm)
-* [NGINX](#nginx)
 
 ## Toolbox
 
@@ -29,8 +28,8 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 
 ## PHP-FPM
 
-TODO
-
-## NGINX
-
-TODO
+| Name                       | Version                                              |
+|----------------------------|------------------------------------------------------|
+| Base image                 | `php:7.1.8-fpm-alpine`                          |
+| APCu                       | `5.1.8`         |
+| PHP extension for Redis    | `3.1.3`     |

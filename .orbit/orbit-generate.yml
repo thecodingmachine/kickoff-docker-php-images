@@ -24,6 +24,19 @@ commands:
     {{- end }}
 
   # |--------------------------------------------------------------------------
+  # | orbit run generate-phpfpm
+  # |--------------------------------------------------------------------------
+  # |
+  # | Generates the PHP-FPM Dockerfiles.
+  # |
+
+  - use: "generate-phpfpm"
+    run:
+    {{- range $version := .Values.Images.phpfpm.php_versions }}
+    - orbit generate -t=php-fpm/Dockerfile.blueprint -o=php-fpm/Dockerfile-{{ $version }} -v=Images,images.yml -r=PHP_VERSION={{ $version }}
+    {{- end }}
+
+  # |--------------------------------------------------------------------------
   # | orbit run generate-readme
   # |--------------------------------------------------------------------------
   # |
