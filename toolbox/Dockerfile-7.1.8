@@ -137,7 +137,7 @@ RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
 
 ENV PHP_CS_FIXER_VERSION 2.4.0
 
-RUN curl -L http://cs.sensiolabs.org/download/php-cs-fixer-v$PHP_CS_FIXER_VERSION.phar -o php-cs-fixer &&\
+RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS_FIXER_VERSION/php-cs-fixer.phar -O php-cs-fixer &&\
     chmod a+x php-cs-fixer &&\
     mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
