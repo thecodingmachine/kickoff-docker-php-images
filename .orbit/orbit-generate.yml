@@ -1,0 +1,35 @@
+# |--------------------------------------------------------------------------
+# | Orbit commands
+# |--------------------------------------------------------------------------
+# |
+# | This file describes the Orbit commands of the project. It requires values
+# | from images.yml.
+# |
+# | https://github.com/gulien/orbit/
+# |
+
+commands:
+
+  # |--------------------------------------------------------------------------
+  # | orbit run generate-toolbox
+  # |--------------------------------------------------------------------------
+  # |
+  # | Generates the Toolbox Dockerfiles.
+  # |
+
+  - use: "generate-toolbox"
+    run:
+    {{- range $version := .Values.Images.toolbox.php_versions }}
+    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-{{ $version }} -v=Images,images.yml -r=PHP_VERSION={{ $version }}
+    {{- end }}
+
+  # |--------------------------------------------------------------------------
+  # | orbit run generate-readme
+  # |--------------------------------------------------------------------------
+  # |
+  # | Generates the README.md file.
+  # |
+
+  - use: "generate-readme"
+    run:
+    - orbit generate -t=.misc/README.blueprint.md -o=README.md -v=Images,images.yml
