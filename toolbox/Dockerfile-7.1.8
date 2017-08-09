@@ -160,9 +160,9 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 # | Installs yarn. It provides some nice improvements over npm.
 # |
 
-ENV YARN_VERSION 0.27.5
+ENV YARN_VERSION 0.23.3-r0
 
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+RUN apk --no-cache add yarn=$YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround

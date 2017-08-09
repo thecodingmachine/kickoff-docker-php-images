@@ -1,17 +1,4 @@
-<p align="center">
-    <img src="https://user-images.githubusercontent.com/8983173/28176182-c45b1196-67f6-11e7-8d96-fd1aefd3fcab.png" alt="kickoff-docker-php's logo" width="200" height="200" />
-</p>
-<h3 align="center">kickoff-docker-php-images</h3>
-<p align="center">Base images of kickoff-docker-php</p>
-
----
-
-This is the Git repository of the Docker images for the [kickoff-docker-php](https://github.com/thecodingmachine/kickoff-docker-php/) project.
-
-# Menu
-
-* [Toolbox](#toolbox)
-* [PHP-FPM](#php-fpm)
+Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmachine/kickoff-docker-php/) project.
 
 ## Toolbox
 {{ range $version := .Values.Images.toolbox.php_versions }}
