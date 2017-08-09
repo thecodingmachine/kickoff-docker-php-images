@@ -18,7 +18,7 @@ This is the Git repository of the Docker images for the [kickoff-docker-php](htt
 
 | Name                       | Version                                              |
 |----------------------------|------------------------------------------------------|
-| Base image                 | `php:7.1.7-alpine`                          |
+| Base image                 | `php:7.1.8-alpine`                          |
 | APCu                       | `5.1.8`         |
 | PHP extension for Redis    | `3.1.3`     |
 | Composer                   | `1.5.0`     |
