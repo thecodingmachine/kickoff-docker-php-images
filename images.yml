@@ -102,7 +102,3 @@ phpfpm:
   # |
 
   phpredis_version: 3.1.3
-
-
-
-
