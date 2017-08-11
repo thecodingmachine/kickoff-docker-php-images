@@ -1,114 +1,20 @@
 toolbox:
 
-  # |--------------------------------------------------------------------------
-  # | OpenSSL
-  # |--------------------------------------------------------------------------
-  # |
-  # | The OpenSSL version of the Toolbox images.
-  # |
-  # | Source: Alpine
-  # |
-
-  openssl_version: 1.0.2k-r0
+  - tag: 3.6-rc1
+    stack:
+      alpine_version: 3.6
+      openssl_version: 1.0.2k-r0
 
 phpfpm:
 
-  # |--------------------------------------------------------------------------
-  # | PHP
-  # |--------------------------------------------------------------------------
-  # |
-  # | The PHP versions of the PHP-FPM images.
-  # |
-  # | Source: Docker Hub
-  # |
-
-  php_versions:
-    - 7.1.8
-
-  # |--------------------------------------------------------------------------
-  # | APCu
-  # |--------------------------------------------------------------------------
-  # |
-  # | The APCu version of the PHP-FPM images.
-  # |
-  # | Source: GitHub
-  # |
-
-  apcu_version: 5.1.8
-
-  # |--------------------------------------------------------------------------
-  # | PHP extension for Redis
-  # |--------------------------------------------------------------------------
-  # |
-  # | The PHP extension for Redis version of the PHP-FPM images.
-  # |
-  # | Source: GitHub
-  # |
-
-  phpredis_version: 3.1.3
-
-  # |--------------------------------------------------------------------------
-  # | OpenSSL
-  # |--------------------------------------------------------------------------
-  # |
-  # | The OpenSSL version of the PHP-FPM images.
-  # |
-  # | Source: Alpine
-  # |
-
-  openssl_version: 1.0.2k-r0
-
-  # |--------------------------------------------------------------------------
-  # | Composer
-  # |--------------------------------------------------------------------------
-  # |
-  # | The Composer version of the PHP-FPM images.
-  # |
-  # | Source: https://getcomposer.org/installer
-  # |
-
-  composer_version: 1.5.1
-
-  # |--------------------------------------------------------------------------
-  # | prestissimo
-  # |--------------------------------------------------------------------------
-  # |
-  # | The prestissimo version of the PHP-FPM images.
-  # |
-  # | Source: Composer
-  # |
-
-  prestissimo_version: 0.3.7
-
-  # |--------------------------------------------------------------------------
-  # | PHP Coding Standards Fixer
-  # |--------------------------------------------------------------------------
-  # |
-  # | The PHP Coding Standards Fixer version of the PHP-FPM images.
-  # |
-  # | Source: GitHub
-  # |
-
-  php_cs_fixer_version: 2.4.0
-
-  # |--------------------------------------------------------------------------
-  # | NodeJS
-  # |--------------------------------------------------------------------------
-  # |
-  # | The NodeJS version of the PHP-FPM images.
-  # |
-  # | Source: Alpine
-  # |
-
-  node_version: 6.10.3-r1
-
-  # |--------------------------------------------------------------------------
-  # | yarn
-  # |--------------------------------------------------------------------------
-  # |
-  # | The yarn version of the PHP-FPM images.
-  # |
-  # | Source: Alpine
-  # |
-
-  yarn_version: 0.23.3-r0
+  - tag: 7.1.8-rc1
+    stack:
+      php_version: 7.1.8
+      apcu_version: 5.1.8
+      phpredis_version: 3.1.3
+      openssl_version: 1.0.2k-r0
+      composer_version: 1.5.1
+      prestissimo_version: 0.3.7
+      php_cs_fixer_version: 2.4.0
+      node_version: 6.10.3-r1
+      yarn_version: 0.23.3-r0

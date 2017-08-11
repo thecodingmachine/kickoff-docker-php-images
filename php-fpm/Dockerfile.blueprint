@@ -1,4 +1,8 @@
-FROM php:{{ .RawData.PHP_VERSION }}-fpm-alpine
+{{- range $image := .Values.Images.phpfpm -}}
+{{- if eq $.RawData.CURRENT_TAG $image.tag -}}
+{{- $stack := $image.stack -}}
+
+FROM php:{{ $stack.php_version }}-fpm-alpine
 
 MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 
@@ -51,7 +55,7 @@ RUN set -xe &&\
 # | Installs the APCu extension for PHP.
 # |
 
-ENV APCU_VERSION {{ .Values.Images.phpfpm.apcu_version }}
+ENV APCU_VERSION {{ $stack.apcu_version }}
 
 RUN mkdir -p /usr/src/php/ext/apcu &&\
     curl -L https://github.com/krakjoe/apcu/archive/v$APCU_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/apcu --strip 1 &&\
@@ -65,7 +69,7 @@ RUN mkdir -p /usr/src/php/ext/apcu &&\
 # | Installs the Redis extension for PHP.
 # |
 
-ENV PHPREDIS_VERSION {{ .Values.Images.phpfpm.phpredis_version }}
+ENV PHPREDIS_VERSION {{ $stack.phpredis_version }}
 
 RUN mkdir -p /usr/src/php/ext/redis &&\
     curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 &&\
@@ -90,7 +94,7 @@ RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories 
 # | Installs OpenSSL for wget command.
 # |
 
-ENV OPENSSL_VERSION {{ .Values.Images.phpfpm.openssl_version }}
+ENV OPENSSL_VERSION {{ $stack.openssl_version }}
 
 RUN apk --no-cache add openssl=$OPENSSL_VERSION
 
@@ -98,7 +102,7 @@ RUN apk --no-cache add openssl=$OPENSSL_VERSION
 # | Git
 # |--------------------------------------------------------------------------
 # |
-# | Installs Git command.
+# | Installs Git command (useful for Composer).
 # |
 
 RUN apk --no-cache add git
@@ -110,13 +114,11 @@ RUN apk --no-cache add git
 # | Installs Composer to easily manage your PHP dependencies.
 # |
 
-ENV COMPOSER_VERSION {{ .Values.Images.phpfpm.composer_version }}
+ENV COMPOSER_VERSION {{ $stack.composer_version }}
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /home/www-data/.composer
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
-    chmod +x /usr/local/bin/composer &&\
-    chown -R www-data:www-data /home/www-data/.composer
+    chmod +x /usr/local/bin/composer
 
 # |--------------------------------------------------------------------------
 # | prestissimo
@@ -125,9 +127,15 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # | Installs prestissimo to fix Composer performance issues.
 # |
 
-ENV PRESTISSIMO_VERSION {{ .Values.Images.phpfpm.prestissimo_version }}
+# installs prestissimo for the www-data user.
+USER www-data
+
+ENV PRESTISSIMO_VERSION {{ $stack.prestissimo_version }}
 
 RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
+
+# done, let's go back to root user!
+USER root
 
 # |--------------------------------------------------------------------------
 # | PHP Coding Standards Fixer
@@ -138,7 +146,7 @@ RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
 # | PSR-2 documents and many more.
 # |
 
-ENV PHP_CS_FIXER_VERSION {{ .Values.Images.phpfpm.php_cs_fixer_version }}
+ENV PHP_CS_FIXER_VERSION {{ $stack.php_cs_fixer_version }}
 
 RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS_FIXER_VERSION/php-cs-fixer.phar -O php-cs-fixer &&\
     chmod a+x php-cs-fixer &&\
@@ -152,7 +160,7 @@ RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS
 # | your frontend dependencies.
 # |
 
-ENV NODE_VERSION {{ .Values.Images.phpfpm.node_version }}
+ENV NODE_VERSION {{ $stack.node_version }}
 
 RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 
@@ -163,7 +171,7 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 # | Installs yarn. It provides some nice improvements over npm.
 # |
 
-ENV YARN_VERSION {{ .Values.Images.phpfpm.yarn_version }}
+ENV YARN_VERSION {{ $stack.yarn_version }}
 
 RUN apk --no-cache add yarn=$YARN_VERSION
 
@@ -175,3 +183,6 @@ RUN apk --no-cache add yarn=$YARN_VERSION
 # |
 
 RUN apk --no-cache add shadow
+
+{{- end -}}
+{{- end -}}

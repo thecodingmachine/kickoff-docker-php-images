@@ -19,7 +19,9 @@ commands:
 
   - use: "generate-toolbox"
     run:
-    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-3.6 -v=Images,images.yml
+    {{- range $image := .Values.Images.toolbox }}
+    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-{{ $image.tag }} -v=Images,images.yml -r=CURRENT_TAG={{ $image.tag }}
+    {{- end }}
 
   # |--------------------------------------------------------------------------
   # | orbit run generate-phpfpm
@@ -30,8 +32,8 @@ commands:
 
   - use: "generate-phpfpm"
     run:
-    {{- range $version := .Values.Images.phpfpm.php_versions }}
-    - orbit generate -t=php-fpm/Dockerfile.blueprint -o=php-fpm/Dockerfile-{{ $version }} -v=Images,images.yml -r=PHP_VERSION={{ $version }}
+    {{- range $image := .Values.Images.phpfpm }}
+    - orbit generate -t=php-fpm/Dockerfile.blueprint -o=php-fpm/Dockerfile-{{ $image.tag }} -v=Images,images.yml -r=CURRENT_TAG={{ $image.tag }}
     {{- end }}
 
   # |--------------------------------------------------------------------------

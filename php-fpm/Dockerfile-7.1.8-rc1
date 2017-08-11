@@ -98,7 +98,7 @@ RUN apk --no-cache add openssl=$OPENSSL_VERSION
 # | Git
 # |--------------------------------------------------------------------------
 # |
-# | Installs Git command.
+# | Installs Git command (useful for Composer).
 # |
 
 RUN apk --no-cache add git
@@ -112,11 +112,9 @@ RUN apk --no-cache add git
 
 ENV COMPOSER_VERSION 1.5.1
 ENV COMPOSER_ALLOW_SUPERUSER 1
-ENV COMPOSER_HOME /home/www-data/.composer
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
-    chmod +x /usr/local/bin/composer &&\
-    chown -R www-data:www-data /home/www-data/.composer
+    chmod +x /usr/local/bin/composer
 
 # |--------------------------------------------------------------------------
 # | prestissimo
@@ -125,9 +123,15 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # | Installs prestissimo to fix Composer performance issues.
 # |
 
+# installs prestissimo for the www-data user.
+USER www-data
+
 ENV PRESTISSIMO_VERSION 0.3.7
 
 RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
+
+# done, let's go back to root user!
+USER root
 
 # |--------------------------------------------------------------------------
 # | PHP Coding Standards Fixer

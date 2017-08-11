@@ -1,4 +1,8 @@
-FROM alpine:3.6
+{{- range $image := .Values.Images.toolbox -}}
+{{- if eq $.RawData.CURRENT_TAG $image.tag -}}
+{{- $stack := $image.stack -}}
+
+FROM alpine:{{ $stack.alpine_version }}
 
 MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 
@@ -10,6 +14,9 @@ MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 # | certificate, the .htdigest file and the Graylog passwords.
 # |
 
-ENV OPENSSL_VERSION {{ .Values.Images.toolbox.openssl_version }}
+ENV OPENSSL_VERSION {{ $stack.openssl_version }}
 
 RUN apk --no-cache add openssl=$OPENSSL_VERSION
+
+{{- end -}}
+{{- end -}}
