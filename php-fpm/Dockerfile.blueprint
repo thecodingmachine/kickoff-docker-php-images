@@ -169,7 +169,7 @@ RUN apk --no-cache add yarn=$YARN_VERSION
 # | Permissions issues workaround
 # |--------------------------------------------------------------------------
 # |
-# | Installs shadow package to enable usermod command.
+# | Installs shadow package to enable usermod and groupmod command.
 # |
 
 RUN apk --no-cache add shadow
