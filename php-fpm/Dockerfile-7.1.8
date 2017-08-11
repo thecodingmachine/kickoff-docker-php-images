@@ -110,7 +110,7 @@ RUN apk --no-cache add git
 # | Installs Composer to easily manage your PHP dependencies.
 # |
 
-ENV COMPOSER_VERSION 1.5.0
+ENV COMPOSER_VERSION 1.5.1
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
     chmod +x /usr/local/bin/composer
@@ -123,6 +123,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # |
 
 ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV COMPOSER_HOME /home/www-data/.composer
 ENV PRESTISSIMO_VERSION 0.3.7
 
 RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION

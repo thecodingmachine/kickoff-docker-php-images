@@ -67,7 +67,7 @@ phpfpm:
   # | Source: https://getcomposer.org/installer
   # |
 
-  composer_version: 1.5.0
+  composer_version: 1.5.1
 
   # |--------------------------------------------------------------------------
   # | prestissimo
