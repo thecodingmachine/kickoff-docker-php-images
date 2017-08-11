@@ -18,7 +18,6 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 | Composer                   | `{{ $.Values.Images.phpfpm.composer_version }}`     | https://getcomposer.org/installer |
 | prestissimo                | `{{ $.Values.Images.phpfpm.prestissimo_version }}`  | Composer                          |
 | PHP Coding Standards Fixer | `{{ $.Values.Images.phpfpm.php_cs_fixer_version }}` | GitHub                            |
-| PHPStan                    | `{{ $.Values.Images.phpfpm.phpstan_version }}`      | Composer                          |
 | NodeJS                     | `{{ $.Values.Images.phpfpm.node_version }}`         | Alpine                            |
 | yarn                       | `{{ $.Values.Images.phpfpm.yarn_version }}`         | Alpine                            |
 {{ end }}

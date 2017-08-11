@@ -18,6 +18,5 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 | Composer                   | `1.5.0`     | https://getcomposer.org/installer |
 | prestissimo                | `0.3.7`  | Composer                          |
 | PHP Coding Standards Fixer | `2.4.0` | GitHub                            |
-| PHPStan                    | `0.7`      | Composer                          |
 | NodeJS                     | `6.10.3-r1`         | Alpine                            |
 | yarn                       | `0.23.3-r0`         | Alpine                            |

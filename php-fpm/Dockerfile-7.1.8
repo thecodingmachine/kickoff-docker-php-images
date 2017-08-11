@@ -143,18 +143,6 @@ RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS
     mv php-cs-fixer /usr/local/bin/php-cs-fixer
 
 # |--------------------------------------------------------------------------
-# | PHPStan
-# |--------------------------------------------------------------------------
-# |
-# | PHPStan focuses on finding errors in your code without actually running it.
-# | It catches whole classes of bugs even before you write tests for the code.
-# |
-
-ENV PHPSTAN_VERSION 0.7
-
-RUN composer global require phpstan/phpstan:$PHPSTAN_VERSION
-
-# |--------------------------------------------------------------------------
 # | NodeJS
 # |--------------------------------------------------------------------------
 # |
