@@ -14,14 +14,12 @@ commands:
   # | orbit run generate-toolbox
   # |--------------------------------------------------------------------------
   # |
-  # | Generates the Toolbox Dockerfiles.
+  # | Generates the Toolbox Dockerfile.
   # |
 
   - use: "generate-toolbox"
     run:
-    {{- range $version := .Values.Images.toolbox.php_versions }}
-    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-{{ $version }} -v=Images,images.yml -r=PHP_VERSION={{ $version }}
-    {{- end }}
+    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-3.6 -v=Images,images.yml
 
   # |--------------------------------------------------------------------------
   # | orbit run generate-phpfpm

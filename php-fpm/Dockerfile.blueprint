@@ -84,6 +84,100 @@ RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories 
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
 
 # |--------------------------------------------------------------------------
+# | OpenSSL
+# |--------------------------------------------------------------------------
+# |
+# | Installs OpenSSL for wget command.
+# |
+
+ENV OPENSSL_VERSION {{ .Values.Images.phpfpm.openssl_version }}
+
+RUN apk --no-cache add openssl=$OPENSSL_VERSION
+
+# |--------------------------------------------------------------------------
+# | Git
+# |--------------------------------------------------------------------------
+# |
+# | Installs Git command.
+# |
+
+RUN apk --no-cache add git
+
+# |--------------------------------------------------------------------------
+# | Composer
+# |--------------------------------------------------------------------------
+# |
+# | Installs Composer to easily manage your PHP dependencies.
+# |
+
+ENV COMPOSER_VERSION {{ .Values.Images.phpfpm.composer_version }}
+
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
+    chmod +x /usr/local/bin/composer
+
+# |--------------------------------------------------------------------------
+# | prestissimo
+# |--------------------------------------------------------------------------
+# |
+# | Installs prestissimo to fix Composer performance issues.
+# |
+
+ENV COMPOSER_ALLOW_SUPERUSER 1
+ENV PRESTISSIMO_VERSION {{ .Values.Images.phpfpm.prestissimo_version }}
+
+RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
+
+# |--------------------------------------------------------------------------
+# | PHP Coding Standards Fixer
+# |--------------------------------------------------------------------------
+# |
+# | The PHP Coding Standards Fixer tool fixes most issues in your code when
+# | you want to follow the PHP coding standards as defined in the PSR-1 and
+# | PSR-2 documents and many more.
+# |
+
+ENV PHP_CS_FIXER_VERSION {{ .Values.Images.phpfpm.php_cs_fixer_version }}
+
+RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS_FIXER_VERSION/php-cs-fixer.phar -O php-cs-fixer &&\
+    chmod a+x php-cs-fixer &&\
+    mv php-cs-fixer /usr/local/bin/php-cs-fixer
+
+# |--------------------------------------------------------------------------
+# | PHPStan
+# |--------------------------------------------------------------------------
+# |
+# | PHPStan focuses on finding errors in your code without actually running it.
+# | It catches whole classes of bugs even before you write tests for the code.
+# |
+
+ENV PHPSTAN_VERSION {{ .Values.Images.phpfpm.phpstan_version }}
+
+RUN composer global require phpstan/phpstan:$PHPSTAN_VERSION
+
+# |--------------------------------------------------------------------------
+# | NodeJS
+# |--------------------------------------------------------------------------
+# |
+# | Installs NodeJS and npm. The later will allow you to easily manage
+# | your frontend dependencies.
+# |
+
+ENV NODE_VERSION {{ .Values.Images.phpfpm.node_version }}
+
+RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
+
+# |--------------------------------------------------------------------------
+# | yarn
+# |--------------------------------------------------------------------------
+# |
+# | Installs yarn. It provides some nice improvements over npm.
+# |
+
+ENV YARN_VERSION {{ .Values.Images.phpfpm.yarn_version }}
+
+RUN apk --no-cache add yarn=$YARN_VERSION
+
+# |--------------------------------------------------------------------------
 # | Permissions issues workaround
 # |--------------------------------------------------------------------------
 # |

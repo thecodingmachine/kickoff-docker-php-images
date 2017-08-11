@@ -2,21 +2,22 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 
 ## Toolbox
 
-| Name                       | Version                                              |
-|----------------------------|------------------------------------------------------|
-| Base image                 | `php:7.1.8-alpine`                          |
-| APCu                       | `5.1.8`         |
-| PHP extension for Redis    | `3.1.3`     |
-| Composer                   | `1.5.0`     |
-| prestissimo                | `0.3.7`  |
-| PHP Coding Standards Fixer | `2.4.0` |
-| NodeJS                     | `6.10.3-r1`         |
-| yarn                       | `0.23.3-r0`         |
+| Name       | Version                                        | Source     |
+|------------|------------------------------------------------|------------|
+| Base image | `alpine:3.6`                                   | Docker Hub |
+| OpenSSL    | `1.0.2k-r0` | Alpine     |
 
 ## PHP-FPM
 
-| Name                    | Version                                         |
-|-------------------------|-------------------------------------------------|
-| Base image              | `php:7.1.8-fpm-alpine`                 |
-| APCu                    | `5.1.8`     |
-| PHP extension for Redis | `3.1.3` |
+| Name                       | Version                                             | Source                            |
+|----------------------------|-----------------------------------------------------|-----------------------------------|
+| Base image                 | `php:7.1.8-fpm-alpine`                     | Docker Hub                        |
+| APCu                       | `5.1.8`         | GitHub                            |
+| PHP extension for Redis    | `3.1.3`     | GitHub                            |
+| OpenSSL                    | `1.0.2k-r0`      | Alpine                            |
+| Composer                   | `1.5.0`     | https://getcomposer.org/installer |
+| prestissimo                | `0.3.7`  | Composer                          |
+| PHP Coding Standards Fixer | `2.4.0` | GitHub                            |
+| PHPStan                    | `0.7`      | Composer                          |
+| NodeJS                     | `6.10.3-r1`         | Alpine                            |
+| yarn                       | `0.23.3-r0`         | Alpine                            |
