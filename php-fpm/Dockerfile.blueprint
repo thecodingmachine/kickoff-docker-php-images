@@ -29,8 +29,8 @@ RUN apk add --no-cache --virtual .persistent-deps \
 
 RUN set -xe &&\
     apk add --no-cache --virtual .build-deps &&\
-    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
     docker-php-ext-configure bcmath --enable-bcmath &&\
+    docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
     docker-php-ext-configure intl --enable-intl &&\
     docker-php-ext-configure mbstring --enable-mbstring &&\
     docker-php-ext-configure mcrypt --enable-mcrypt &&\
@@ -40,6 +40,7 @@ RUN set -xe &&\
     docker-php-ext-configure zip --enable-zip &&\
     docker-php-ext-install \
         bcmath \
+        gd \
         intl \
         mbstring \
         mcrypt \
