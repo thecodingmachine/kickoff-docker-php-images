@@ -73,22 +73,6 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
     echo 'redis' >> /usr/src/php-available-exts &&\
     docker-php-ext-install redis
 
-
-# |--------------------------------------------------------------------------
-# | YAML extension
-# |--------------------------------------------------------------------------
-# |
-# | Installs the YAML extension for PHP.
-# |
-
-ENV YAML_VERSION 2.0.2
-
-RUN mkdir -p /usr/src/php/ext/yaml &&\
-    curl -L https://github.com/php/pecl-file_formats-yaml/archive/2.0.2.tar.gz | tar xvz -C /usr/src/php/ext/yaml --strip 1 &&\
-    echo 'yaml' >> /usr/src/php-available-exts &&\
-    docker-php-ext-install yaml
-
-
 # |--------------------------------------------------------------------------
 # | 3.6 repositories
 # |--------------------------------------------------------------------------
@@ -99,6 +83,23 @@ RUN mkdir -p /usr/src/php/ext/yaml &&\
 
 RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
+
+
+# |--------------------------------------------------------------------------
+# | YAML extension
+# |--------------------------------------------------------------------------
+# |
+# | Installs the YAML extension for PHP.
+# |
+
+ENV YAML_VERSION 2.0.2
+
+RUN apk add --no-cache yaml-dev &&\
+    mkdir -p /usr/src/php/ext/yaml &&\
+    curl -L https://github.com/php/pecl-file_formats-yaml/archive/2.0.2.tar.gz | tar xvz -C /usr/src/php/ext/yaml --strip 1 &&\
+    echo 'yaml' >> /usr/src/php-available-exts &&\
+    docker-php-ext-install yaml
+
 
 # |--------------------------------------------------------------------------
 # | OpenSSL

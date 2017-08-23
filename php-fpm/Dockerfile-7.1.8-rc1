@@ -73,8 +73,6 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
     echo 'redis' >> /usr/src/php-available-exts &&\
     docker-php-ext-install redis
 
-
-
 # |--------------------------------------------------------------------------
 # | 3.6 repositories
 # |--------------------------------------------------------------------------
@@ -85,6 +83,8 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
 
 RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
+
+
 
 # |--------------------------------------------------------------------------
 # | OpenSSL
