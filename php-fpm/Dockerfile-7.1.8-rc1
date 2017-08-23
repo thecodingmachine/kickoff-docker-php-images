@@ -73,6 +73,8 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
     echo 'redis' >> /usr/src/php-available-exts &&\
     docker-php-ext-install redis
 
+
+
 # |--------------------------------------------------------------------------
 # | 3.6 repositories
 # |--------------------------------------------------------------------------
