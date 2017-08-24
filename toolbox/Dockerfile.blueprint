@@ -1,5 +1,5 @@
 {{- range $image := .Values.Images.toolbox -}}
-{{- if eq $.RawData.CURRENT_TAG $image.tag -}}
+{{- if eq true $image.current -}}
 {{- $stack := $image.stack -}}
 
 FROM alpine:{{ $stack.alpine_version }}

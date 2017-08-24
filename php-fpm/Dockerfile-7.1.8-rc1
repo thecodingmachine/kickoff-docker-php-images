@@ -36,7 +36,6 @@ RUN set -xe &&\
     docker-php-ext-configure zip --enable-zip &&\
     docker-php-ext-install \
         bcmath \
-        gd \
         intl \
         mbstring \
         mcrypt \
@@ -83,8 +82,6 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
 
 RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
     echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
-
-
 
 # |--------------------------------------------------------------------------
 # | OpenSSL

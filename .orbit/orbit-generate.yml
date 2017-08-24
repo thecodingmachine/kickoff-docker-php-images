@@ -19,9 +19,11 @@ commands:
 
   - use: "generate-toolbox"
     run:
-    {{- range $image := .Values.Images.toolbox }}
-    - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-{{ $image.tag }} -v=Images,images.yml -r=CURRENT_TAG={{ $image.tag }}
-    {{- end }}
+      {{- range $image := .Values.Images.toolbox }}
+      {{- if eq true $image.current }}
+      - orbit generate -t=toolbox/Dockerfile.blueprint -o=toolbox/Dockerfile-{{ $image.tag }} -v=Images,images.yml
+      {{- end }}
+      {{- end }}
 
   # |--------------------------------------------------------------------------
   # | orbit run generate-phpfpm
@@ -32,9 +34,11 @@ commands:
 
   - use: "generate-phpfpm"
     run:
-    {{- range $image := .Values.Images.phpfpm }}
-    - orbit generate -t=php-fpm/Dockerfile.blueprint -o=php-fpm/Dockerfile-{{ $image.tag }} -v=Images,images.yml -r=CURRENT_TAG={{ $image.tag }}
-    {{- end }}
+      {{- range $image := .Values.Images.phpfpm }}
+      {{- if eq true $image.current }}
+      - orbit generate -t=php-fpm/Dockerfile.blueprint -o=php-fpm/Dockerfile-{{ $image.tag }} -v=Images,images.yml -r=CURRENT_TAG={{ $image.tag }}
+      {{- end }}
+      {{- end }}
 
   # |--------------------------------------------------------------------------
   # | orbit run generate-readme
@@ -45,4 +49,4 @@ commands:
 
   - use: "generate-readme"
     run:
-    - orbit generate -t=.misc/README.blueprint.md -o=README.md -v=Images,images.yml
+      - orbit generate -t=.misc/README.blueprint.md -o=README.md -v=Images,images.yml

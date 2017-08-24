@@ -1,16 +1,19 @@
 toolbox:
 
   - tag: 3.6-rc3
+    current: true
     stack:
       alpine_version: 3.6
       openssl_version: 1.0.2k-r0
 
   - tag: 3.6-rc2
+    current: false
     stack:
       alpine_version: 3.6
       openssl_version: 1.0.2k-r0
 
   - tag: 3.6-rc1
+    current: false
     stack:
       alpine_version: 3.6
       openssl_version: 1.0.2k-r0
@@ -18,6 +21,7 @@ toolbox:
 phpfpm:
 
   - tag: 7.1.8-rc3
+    current: true
     stack:
       php_version: 7.1.8
       apcu_version: 5.1.8
@@ -31,6 +35,7 @@ phpfpm:
       yarn_version: 0.23.3-r0
 
   - tag: 7.1.8-rc2
+    current: false
     stack:
       php_version: 7.1.8
       apcu_version: 5.1.8
@@ -43,6 +48,7 @@ phpfpm:
       yarn_version: 0.23.3-r0
 
   - tag: 7.1.8-rc1
+    current: false
     stack:
       php_version: 7.1.8
       apcu_version: 5.1.8
