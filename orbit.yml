@@ -18,6 +18,6 @@ commands:
 
   - use: "generate"
     run:
-      - orbit run generate-toolbox -c=.orbit/orbit-generate.yml -v=Images,images.yml
+      - orbit run generate-toolbox -c=.orbit/orbit-generate.yml -v=Images,images.yml -S
       - orbit run generate-phpfpm -c=.orbit/orbit-generate.yml -v=Images,images.yml -s
       - orbit run generate-readme -c=.orbit/orbit-generate.yml -v=Images,images.yml -s
