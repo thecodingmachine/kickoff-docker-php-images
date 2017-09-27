@@ -17,7 +17,7 @@ commands:
   # | Generates the Toolbox Dockerfile.
   # |
 
-  - use: "generate-toolbox"
+  - use: generate-toolbox
     run:
       {{- range $image := .Values.Images.toolbox }}
       {{- if eq true $image.current }}
@@ -32,7 +32,7 @@ commands:
   # | Generates the PHP-FPM Dockerfiles.
   # |
 
-  - use: "generate-phpfpm"
+  - use: generate-phpfpm
     run:
       {{- range $image := .Values.Images.phpfpm }}
       {{- if eq true $image.current }}
@@ -47,6 +47,6 @@ commands:
   # | Generates the README.md file.
   # |
 
-  - use: "generate-readme"
+  - use: generate-readme
     run:
       - orbit generate -t=.misc/README.blueprint.md -o=README.md -v=Images,images.yml
