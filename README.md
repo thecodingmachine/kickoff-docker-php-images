@@ -60,7 +60,7 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 | prestissimo                | `0.3.7`        |
 | PHP Coding Standards Fixer | `2.7.1`       |
 | NodeJS                     | `6.10.3-r1`               |
-| yarn                       | `1.2.1`               |
+| yarn                       | `1.2.1-r0`               |
 
 ### 7.1.9-v2.1.0
 

@@ -79,15 +79,17 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
     docker-php-ext-install redis
 
 # |--------------------------------------------------------------------------
-# | 3.6 repositories
+# | 3.6 & Edge repositories
 # |--------------------------------------------------------------------------
 # |
-# | Installs the 3.6 repositories, as some packages are not available by
-# | default in the current version of Alpine used by the PHP image.
+# | Installs the 3.6 and Edge repositories, as some packages are not available
+# | by default in the current version of Alpine used by the PHP image.
 # |
 
-RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
-    echo http://dl-2.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories
+RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
+    echo http://dl-cdn.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories &&\
+    echo http://dl-cdn.alpinelinux.org/alpine/edge/main/ >> /etc/apk/repositories &&\
+    echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
 
 # |--------------------------------------------------------------------------
 # | YAML extension
@@ -210,7 +212,7 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 
 ENV YARN_VERSION {{ $stack.yarn_version }}
 
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
+RUN apk --no-cache add yarn=$YARN_VERSION
 
 # |--------------------------------------------------------------------------
 # | Permissions issues workaround
