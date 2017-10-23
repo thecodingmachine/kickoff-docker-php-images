@@ -19,6 +19,6 @@ commands:
   - use: generate
     short: Generates all Dockerfiles and the README.md file
     run:
-      - orbit run generate-toolbox -c=.orbit/orbit-generate.yml -v=Images,images.yml
-      - orbit run generate-phpfpm -c=.orbit/orbit-generate.yml -v=Images,images.yml
-      - orbit run generate-readme -c=.orbit/orbit-generate.yml -v=Images,images.yml
+      - orbit run generate-toolbox -c=utils/orbit-generate.yml -v=Images,images.yml
+      - orbit run generate-php-fpm -c=utils/orbit-generate.yml -v=Images,images.yml
+      - orbit run generate-readme -c=utils/orbit-generate.yml -v=Images,images.yml

@@ -26,13 +26,13 @@ commands:
       {{- end }}
 
   # |--------------------------------------------------------------------------
-  # | orbit run generate-phpfpm
+  # | orbit run generate-php-fpm
   # |--------------------------------------------------------------------------
   # |
   # | Generates the PHP-FPM Dockerfiles.
   # |
 
-  - use: generate-phpfpm
+  - use: generate-php-fpm
     run:
       {{- range $image := .Values.Images.phpfpm }}
       {{- if eq true $image.current }}
@@ -49,4 +49,4 @@ commands:
 
   - use: generate-readme
     run:
-      - orbit generate -t=.misc/README.blueprint.md -o=README.md -v=Images,images.yml
+      - orbit generate -t=utils/README.blueprint.md -o=README.md -v=Images,images.yml

@@ -1,8 +1,4 @@
-{{- range $image := .Values.Images.phpfpm -}}
-{{- if eq true $image.current -}}
-{{- $stack := $image.stack -}}
-
-FROM php:{{ $stack.php_version }}-fpm-alpine
+FROM php:7.1.10-fpm-alpine
 
 MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 
@@ -57,7 +53,7 @@ RUN set -xe &&\
 # | Installs the APCu extension for PHP.
 # |
 
-ENV APCU_VERSION {{ $stack.apcu_version }}
+ENV APCU_VERSION 5.1.8
 
 RUN mkdir -p /usr/src/php/ext/apcu &&\
     curl -L https://github.com/krakjoe/apcu/archive/v$APCU_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/apcu --strip 1 &&\
@@ -71,7 +67,7 @@ RUN mkdir -p /usr/src/php/ext/apcu &&\
 # | Installs the Redis extension for PHP.
 # |
 
-ENV PHPREDIS_VERSION {{ $stack.phpredis_version }}
+ENV PHPREDIS_VERSION 3.1.4
 
 RUN mkdir -p /usr/src/php/ext/redis &&\
     curl -L https://github.com/phpredis/phpredis/archive/$PHPREDIS_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/redis --strip 1 &&\
@@ -96,7 +92,7 @@ RUN echo http://dl-2.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories 
 # | Installs the YAML extension for PHP.
 # |
 
-ENV YAML_VERSION {{ $stack.yaml_version }}
+ENV YAML_VERSION 2.0.2
 
 RUN mkdir -p /usr/src/php/ext/yaml &&\
     curl -L https://github.com/php/pecl-file_formats-yaml/archive/$YAML_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/yaml --strip 1 &&\
@@ -110,7 +106,7 @@ RUN mkdir -p /usr/src/php/ext/yaml &&\
 # | Installs Xdebug, a tool for easily debugging your PHP code.
 # |
 
-ENV XDEBUG_VERSION {{ $stack.xdebug_version }}
+ENV XDEBUG_VERSION XDEBUG_2_5_5
 
 RUN mkdir -p /usr/src/php/ext/xdebug &&\
     curl -L https://github.com/xdebug/xdebug/archive/$XDEBUG_VERSION.tar.gz | tar xvz -C /usr/src/php/ext/xdebug --strip 1 &&\
@@ -131,7 +127,7 @@ RUN mkdir -p /usr/src/php/ext/xdebug &&\
 # | Installs OpenSSL for wget command.
 # |
 
-ENV OPENSSL_VERSION {{ $stack.openssl_version }}
+ENV OPENSSL_VERSION 1.0.2k-r0
 
 RUN apk --no-cache add openssl=$OPENSSL_VERSION
 
@@ -151,7 +147,7 @@ RUN apk --no-cache add git
 # | Installs Composer to easily manage your PHP dependencies.
 # |
 
-ENV COMPOSER_VERSION {{ $stack.composer_version }}
+ENV COMPOSER_VERSION 1.5.2
 ENV COMPOSER_ALLOW_SUPERUSER 1
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer --version=$COMPOSER_VERSION &&\
@@ -167,7 +163,7 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # installs prestissimo for the www-data user.
 USER www-data
 
-ENV PRESTISSIMO_VERSION {{ $stack.prestissimo_version }}
+ENV PRESTISSIMO_VERSION 0.3.7
 
 RUN composer global require hirak/prestissimo:$PRESTISSIMO_VERSION
 
@@ -183,7 +179,7 @@ USER root
 # | PSR-2 documents and many more.
 # |
 
-ENV PHP_CS_FIXER_VERSION {{ $stack.php_cs_fixer_version }}
+ENV PHP_CS_FIXER_VERSION 2.7.1
 
 RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS_FIXER_VERSION/php-cs-fixer.phar -O php-cs-fixer &&\
     chmod a+x php-cs-fixer &&\
@@ -197,7 +193,7 @@ RUN wget https://github.com/FriendsOfPHP/PHP-CS-Fixer/releases/download/v$PHP_CS
 # | your frontend dependencies.
 # |
 
-ENV NODE_VERSION {{ $stack.node_version }}
+ENV NODE_VERSION 6.10.3-r1
 
 RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 
@@ -208,7 +204,7 @@ RUN apk --no-cache add nodejs=$NODE_VERSION nodejs-npm=$NODE_VERSION
 # | Installs yarn. It provides some nice improvements over npm.
 # |
 
-ENV YARN_VERSION {{ $stack.yarn_version }}
+ENV YARN_VERSION 1.2.1
 
 RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERSION
 
@@ -220,6 +216,3 @@ RUN curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version $YARN_VERS
 # |
 
 RUN apk --no-cache add shadow
-
-{{- end -}}
-{{- end -}}
