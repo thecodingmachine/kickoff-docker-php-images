@@ -129,7 +129,7 @@ RUN mkdir -p /usr/src/php/ext/xdebug &&\
 # | Installs OpenSSL for wget command.
 # |
 
-ENV OPENSSL_VERSION 1.0.2k-r0
+ENV OPENSSL_VERSION 1.0.2m-r0
 
 RUN apk --no-cache add openssl=$OPENSSL_VERSION
 

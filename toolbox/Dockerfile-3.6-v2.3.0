@@ -10,6 +10,6 @@ MAINTAINER Julien Neuhart <j.neuhart@thecodingmachine.com>
 # | certificate, the .htdigest file and the Graylog passwords.
 # |
 
-ENV OPENSSL_VERSION 1.0.2k-r0
+ENV OPENSSL_VERSION 1.0.2m-r0
 
 RUN apk --no-cache add openssl=$OPENSSL_VERSION
