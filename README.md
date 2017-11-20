@@ -2,6 +2,13 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 
 ## Toolbox
 
+### 3.6-v2.3.0
+
+| Name       | Version                                    |
+|------------|--------------------------------------------|
+| Base image | `alpine:3.6` |
+| OpenSSL    | `1.0.2k-r0`       |
+
 ### 3.6-v2.2.0
 
 | Name       | Version                                    |
@@ -45,6 +52,22 @@ Base Docker images for the [kickoff-docker-php](https://github.com/thecodingmach
 | OpenSSL    | `1.0.2k-r0`       |
 
 ## PHP-FPM
+
+### 7.1.11-v2.3.0
+
+| Name                       | Version                                         |
+|----------------------------|-------------------------------------------------|
+| Base image                 | `php:7.1.11-fpm-alpine` |
+| APCu                       | `5.1.8`               |
+| PHP extension for Redis    | `3.1.4`           |
+| YAML                       | `2.0.2`               |
+| Xdebug                     | `XDEBUG_2_5_5`             |
+| OpenSSL                    | `1.0.2k-r0`            |
+| Composer                   | `1.5.2`           |
+| prestissimo                | `0.3.7`        |
+| PHP Coding Standards Fixer | `2.8.2`       |
+| NodeJS                     | `8.9.1-r0`               |
+| yarn                       | `1.3.2-r0`               |
 
 ### 7.1.10-v2.2.0
 

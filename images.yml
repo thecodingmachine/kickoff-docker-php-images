@@ -1,7 +1,13 @@
 toolbox:
 
-  - tag: 3.6-v2.2.0
+  - tag: 3.6-v2.3.0
     current: true
+    stack:
+      alpine_version: 3.6
+      openssl_version: 1.0.2k-r0
+
+  - tag: 3.6-v2.2.0
+    current: false
     stack:
       alpine_version: 3.6
       openssl_version: 1.0.2k-r0
@@ -38,8 +44,23 @@ toolbox:
 
 phpfpm:
 
-  - tag: 7.1.10-v2.2.0
+  - tag: 7.1.11-v2.3.0
     current: true
+    stack:
+      php_version: 7.1.11
+      apcu_version: 5.1.8
+      phpredis_version: 3.1.4
+      yaml_version: 2.0.2
+      xdebug_version: XDEBUG_2_5_5
+      openssl_version: 1.0.2k-r0
+      composer_version: 1.5.2
+      prestissimo_version: 0.3.7
+      php_cs_fixer_version: 2.8.2
+      node_version: 8.9.1-r0
+      yarn_version: 1.3.2-r0
+
+  - tag: 7.1.10-v2.2.0
+    current: false
     stack:
       php_version: 7.1.10
       apcu_version: 5.1.8
