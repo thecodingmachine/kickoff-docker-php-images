@@ -23,8 +23,8 @@ RUN apk add --no-cache --virtual .persistent-deps \
     freetype-dev \
     icu \
     icu-dev \
-    libmcrypt \
-    libmcrypt-dev \
+    #libmcrypt \
+    #libmcrypt-dev \
     libxml2-dev \
     yaml-dev
 
@@ -34,7 +34,7 @@ RUN set -xe &&\
     docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ &&\
     docker-php-ext-configure intl --enable-intl &&\
     docker-php-ext-configure mbstring --enable-mbstring &&\
-    docker-php-ext-configure mcrypt --enable-mcrypt &&\
+    #docker-php-ext-configure mcrypt --enable-mcrypt &&\
     docker-php-ext-configure pdo_mysql --with-pdo-mysql &&\
     docker-php-ext-configure opcache --enable-opcache &&\
     docker-php-ext-configure soap --enable-soap &&\
@@ -44,11 +44,13 @@ RUN set -xe &&\
         gd \
         intl \
         mbstring \
-        mcrypt \
+        #mcrypt \
         pdo_mysql \
         opcache \
         soap \
         zip
+
+# Note: mycrpt is no more supported since PHP 7.2. See: http://php.net/manual/fr/migration71.deprecated.php
 
 # |--------------------------------------------------------------------------
 # | APCu extension
@@ -79,15 +81,15 @@ RUN mkdir -p /usr/src/php/ext/redis &&\
     docker-php-ext-install redis
 
 # |--------------------------------------------------------------------------
-# | 3.6 & Edge repositories
+# | 3.7 & Edge repositories
 # |--------------------------------------------------------------------------
 # |
-# | Installs the 3.6 and Edge repositories, as some packages are not available
+# | Installs the 3.7 and Edge repositories, as some packages are not available
 # | by default in the current version of Alpine used by the PHP image.
 # |
 
-RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.6/main/ >> /etc/apk/repositories &&\
-    echo http://dl-cdn.alpinelinux.org/alpine/v3.6/community/ >> /etc/apk/repositories &&\
+RUN echo http://dl-cdn.alpinelinux.org/alpine/v3.7/main/ >> /etc/apk/repositories &&\
+    echo http://dl-cdn.alpinelinux.org/alpine/v3.7/community/ >> /etc/apk/repositories &&\
     echo http://dl-cdn.alpinelinux.org/alpine/edge/main/ >> /etc/apk/repositories &&\
     echo http://dl-cdn.alpinelinux.org/alpine/edge/community/ >> /etc/apk/repositories
 
