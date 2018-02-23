@@ -1,4 +1,4 @@
-{{- range $image := .Values.Images.toolbox -}}
+{{- range $image := .Orbit.Images.toolbox -}}
 {{- if eq true $image.current -}}
 {{- $stack := $image.stack -}}
 

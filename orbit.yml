@@ -1,13 +1,13 @@
 # |--------------------------------------------------------------------------
-# | Orbit commands
+# | Orbit tasks
 # |--------------------------------------------------------------------------
 # |
-# | This file describes the Orbit commands of the project.
+# | This file describes the Orbit tasks of the project.
 # |
 # | https://github.com/gulien/orbit/
 # |
 
-commands:
+tasks:
 
   # |--------------------------------------------------------------------------
   # | orbit run generate
@@ -19,6 +19,14 @@ commands:
   - use: generate
     short: Generates all Dockerfiles and the README.md file
     run:
-      - orbit run generate-toolbox -c=utils/orbit-generate.yml -v=Images,images.yml
-      - orbit run generate-php-fpm -c=utils/orbit-generate.yml -v=Images,images.yml
-      - orbit run generate-readme -c=utils/orbit-generate.yml -v=Images,images.yml
+      {{- range $image := .Orbit.Images.phpfpm }}
+      {{- if eq true $image.current }}
+      - orbit generate -f php-fpm/Dockerfile.blueprint -o php-fpm/Dockerfile-{{ $image.tag }}
+      {{- end }}
+      {{- end }}
+      {{- range $image := .Orbit.Images.toolbox }}
+      {{- if eq true $image.current }}
+      - orbit generate -f toolbox/Dockerfile.blueprint -o toolbox/Dockerfile-{{ $image.tag }}
+      {{- end }}
+      {{- end }}
+      - orbit generate -f utils/README.blueprint.md -o README.md

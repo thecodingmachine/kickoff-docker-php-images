@@ -9,7 +9,7 @@ find below useful information about how to contribute to the docker-kickoff-php-
 
 1. Fork this repository
 2. Clone it to the folder of your choice
-3. Install [Orbit](https://github.com/gulien/orbit) (**>= 2.0.0**)
+3. Install [Orbit](https://github.com/gulien/orbit) (**>= 3.0.0**)
 
 ### Working with git
 

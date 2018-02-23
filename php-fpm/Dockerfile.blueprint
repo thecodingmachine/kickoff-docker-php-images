@@ -1,4 +1,4 @@
-{{- range $image := .Values.Images.phpfpm -}}
+{{- range $image := .Orbit.Images.phpfpm -}}
 {{- if eq true $image.current -}}
 {{- $stack := $image.stack -}}
 
